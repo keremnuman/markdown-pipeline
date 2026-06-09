@@ -7,9 +7,9 @@ name = "doc2md"
 version = "0.1.0"
 description = "Convert PDF, DOCX, XLSX to Markdown via a simple CLI or Python API."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
-    "markitdown[all]",
+    "markitdown[all]>=0.1.0",
     "typer",
     "rich",
     "pyyaml",
