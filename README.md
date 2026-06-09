@@ -12,7 +12,7 @@ A local, resilient Python pipeline designed to convert PDF documents into struct
 ## Usage
 
 **Batch Processing:**
-1. Place your target `.pdf` files into the `data/input_pdfs` directory.
+1. Place your target `.pdf`, `.docx`, or `.xlsx` files into the `data/input_files` directory.
 2. Execute the main script:
     ```bash
     python main.py

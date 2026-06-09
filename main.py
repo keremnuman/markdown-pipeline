@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from pdf2md import MicrosoftMarkItDownConverter, DocumentPipeline
+from doc2md import MicrosoftMarkItDownConverter, DocumentPipeline
 
 logging.basicConfig(
     level=logging.INFO,
@@ -8,7 +8,7 @@ logging.basicConfig(
 )
 
 if __name__ == "__main__":
-    INPUT_DIRECTORY = Path("./data/input_pdfs")
+    INPUT_DIRECTORY = Path("./data/input_files")
     OUTPUT_DIRECTORY = Path("./data/output_md")
     
     INPUT_DIRECTORY.mkdir(parents=True, exist_ok=True)

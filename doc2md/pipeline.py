@@ -1,19 +1,21 @@
 import logging
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Set
 from .converter import BaseDocumentConverter, ConversionError
 
 logger = logging.getLogger(__name__)
 
 class DocumentPipeline:
+    SUPPORTED_EXTENSIONS: Set[str] = {".pdf", ".docx", ".xlsx"}
+
     def __init__(self, converter: BaseDocumentConverter, output_dir: Path):
         self.converter = converter
         self.output_dir = output_dir
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def process_single(self, file_path: Path) -> Optional[Path]:
-        if not file_path.exists() or file_path.suffix.lower() != '.pdf':
-            logger.error(f"Invalid or missing PDF file: {file_path}")
+        if not file_path.exists() or file_path.suffix.lower() not in self.SUPPORTED_EXTENSIONS:
+            logger.error(f"Unsupported or missing file format: {file_path}")
             return None
 
         try:
@@ -28,8 +30,9 @@ class DocumentPipeline:
 
     def process_batch(self, input_dir: Path) -> List[Path]:
         successful_paths = []
-        for pdf_path in input_dir.glob("*.pdf"):
-            result = self.process_single(pdf_path)
-            if result:
-                successful_paths.append(result)
+        for file_path in input_dir.iterdir():
+            if file_path.is_file() and file_path.suffix.lower() in self.SUPPORTED_EXTENSIONS:
+                result = self.process_single(file_path)
+                if result:
+                    successful_paths.append(result)
         return successful_paths

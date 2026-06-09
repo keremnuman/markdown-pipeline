@@ -6,5 +6,6 @@ venv/
 env/
 data/
 *.pdf
-input_pdfs/
+data/
+input_files/
 output_md/
