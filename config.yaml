@@ -1,0 +1,8 @@
+input_dir: ./data/input_files
+output_dir: ./data/output_md
+max_workers: 4
+converter: markitdown          # to be added
+supported_extensions:
+  - .pdf
+  - .docx
+  - .xlsx

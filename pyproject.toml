@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doc2md"
+version = "0.1.0"
+description = "Convert PDF, DOCX, XLSX to Markdown via a simple CLI or Python API."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "markitdown[all]",
+    "typer",
+    "rich",
+    "pyyaml",
+]
+
+[project.scripts]
+doc2md = "doc2md.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["doc2md*"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
