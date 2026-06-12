@@ -1,22 +1,74 @@
-# PDF to Markdown Pipeline
+# doc2md
 
-A local, resilient Python pipeline designed to convert PDF documents into structured Markdown format. This tool optimizes documents for Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) architectures by drastically reducing token consumption and preserving critical structural data like tables.
+> Convert PDF, DOCX, and XLSX files to clean Markdown — one command, no API keys.
 
-## Key Features
+[![CI](https://github.com/keremnuman/markdown-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/keremnuman/markdown-pipeline/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-* **Token Optimization:** Converts raw PDF text into clean Markdown, reducing visual noise and lowering token costs significantly.
-* **Structural Integrity:** Preserves tables and formatting to prevent AI hallucinations during RAG workflows.
-* **Local Processing:** Runs entirely on your machine without requiring external API keys.
-* **Modular Design:** Built with a fault-tolerant, object-oriented architecture utilizing Microsoft's `markitdown` engine.
+Built for developers and teams who feed documents into LLMs or RAG pipelines.
 
-## Usage
+---
 
-**Batch Processing:**
-1. Place your target `.pdf`, `.docx`, or `.xlsx` files into the `data/input_files` directory.
-2. Execute the main script:
-    ```bash
-    python main.py
-    ```
-3. Retrieve your processed `.md` files from the `data/output_md` directory.
+## Installation
 
-This pipeline is powered by the [MarkItDown](https://github.com/microsoft/markitdown) engine developed by Microsoft. Our architecture wraps this core parsing engine into a fault-tolerant, batch-processing pipeline suitable for automated AI data preparation workflows.
+```bash
+pip install doc2md
+```
+
+Or from source:
+
+```bash
+git clone https://github.com/keremnuman/markdown-pipeline.git
+cd markdown-pipeline
+pip install -e .
+```
+
+---
+
+## CLI
+
+```bash
+# Single file
+doc2md report.pdf
+
+# Entire folder
+doc2md ./documents --output ./output_md
+
+# Parallel workers
+doc2md ./documents --workers 8
+
+# With config file
+doc2md --config config.yaml
+```
+
+---
+
+## Python API
+
+```python
+from pathlib import Path
+from doc2md import MicrosoftMarkItDownConverter, DocumentPipeline
+
+converter = MicrosoftMarkItDownConverter()
+pipeline  = DocumentPipeline(converter=converter, output_dir=Path("./output"))
+
+pipeline.process_single(Path("report.pdf"))   # single file
+pipeline.process_batch(Path("./documents"))   # batch
+```
+
+---
+
+## Contributing
+
+```bash
+git clone https://github.com/keremnuman/markdown-pipeline.git
+pip install -e ".[dev]"
+pytest tests/ -v
+```
+
+---
+
+## License
+
+MIT
