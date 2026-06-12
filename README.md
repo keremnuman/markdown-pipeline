@@ -1,4 +1,4 @@
-# doc2md
+# markpipe
 
 > Convert PDF, DOCX, and XLSX files to clean Markdown — one command, no API keys.
 
