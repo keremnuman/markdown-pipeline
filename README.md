@@ -13,7 +13,7 @@ Built for developers and teams who feed documents into LLMs or RAG pipelines.
 ## Installation
 
 ```bash
-pip install doc2md
+pip install markpipe
 ```
 
 Or from source:
